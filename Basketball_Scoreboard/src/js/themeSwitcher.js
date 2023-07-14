@@ -1,3 +1,5 @@
+const themeButtons = document.querySelectorAll("[data-set-theme]");
+
 const setTheme = (theme) => {
   // Set the theme as a data attribute on the root element
   document.documentElement.setAttribute("data-theme", theme);
