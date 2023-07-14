@@ -1,0 +1,168 @@
+/*
+  Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+  - The "symbol *" part is to solve Firefox SVG sprite bug
+*/
+*:where(:not(html, iframe, canvas, img, svg, video, audio, div, span):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Font Inheritance */
+:where(body, button, input, select, optgroup, textarea) {
+  font-family: inherit;
+}
+
+* {
+  box-sizing: border-box;
+
+  & > ::before,
+  & > ::after {
+    box-sizing: inherit;
+  }
+}
+
+/* Box Sizing Adjustment for Certain Elements */
+:where(img, fieldset) {
+  box-sizing: content-box;
+}
+
+/* Remove default styles for buttons and input types */
+:where(button, input[type='button'], input[type='submit'], input[type='reset']) {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+}
+
+/* Remove default margins for form elements */
+:where(input, select, textarea, button) {
+  margin: 0;
+}
+
+/* Remove default padding, border, and margin for fieldset and legend */
+:where(fieldset, legend) {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+[disabled],
+[inert] {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+a {
+  color: var(--link-color);
+}
+
+/* Reapply the pointer cursor for anchor tags and buttons */
+a:not([disabled]):not([inert]),
+button:not([disabled]):not([inert]) {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol:not(.revert),
+ul:not(.revert),
+menu:not(.revert) {
+  list-style: none;
+}
+ol.revert,
+ul.revert,
+menu.revert {
+  padding-inline-start: 1em;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+  all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+  content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+  display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+  - fix for the content editable attribute will work properly.
+  - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable='false'])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable='true']) {
+  -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+  all: revert;
+}
+
+/* fix for Web Components and Shadow DOM */
+:host {
+  display: contents !important;
+}
+
+/* Custom focus-visible outline style */
+*:where(:focus-visible):not([disbaled]),
+*:where(:focus-visible):not([inert]) {
+  border-radius: 0.125em;
+  color: rgb(var(--link-rgb) / 1);
+  outline: 0.075em solid rgb(var(--link-rgb) / 1);
+  outline-offset: 0.125em;
+
+  transition: outline calc(var(--trans-duration) / 3) var(--trans-delay) linear, outline-offset calc(var(--trans-duration) / 3) var(--trans-delay) linear;
+}
+/* Fallback for browsers that do not support :focus-visible */
+*:focus:not(:focus-visible):not([disabled]),
+*:focus:not(:focus-visible):not([inert]) {
+  outline: none;
+}

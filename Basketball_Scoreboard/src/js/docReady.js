@@ -1,0 +1,1 @@
+export default () => new Promise(resolve => (document.readyState === 'complete' || document.readyState === 'interactive' ? resolve() : document.addEventListener('DOMContentLoaded', resolve, { once: true })));

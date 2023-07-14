@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#14b8a6" />
+    <title>Basketball Scoreboard</title>
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Press+Start+2P&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link href="src/css/index.scss" rel="stylesheet" />
+
+    <script src="src/js/index.js" type="module" async></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="appBackground"></div>
+
+      <header role="banner">
+        <div class="container">
+          <h1>Basketball Scoreboard</h1>
+          <nav role="navigation">
+            <button id="appInfo" data-modal="#modalInfo">About <span class="readerOnly">this app</span></button>
+            <button id="scoreReset" data-modal="#modalResetConfirm" disabled>New Game</button>
+
+            <div id="appTheme" class="btnGroup" role="group">
+              <button data-set-theme="dark">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z" /></svg>
+              </button>
+              <button data-set-theme="candy">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M210.8 334.8C265.3 314.2 304 261.6 304 200v-8c0-61.9-50.1-112-112-112S80 130.1 80 192c0 39.8 32.2 72 72 72s72-32.2 72-72v-8c0-13.3-10.7-24-24-24s-24 10.7-24 24v8c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-35.3 28.7-64 64-64s64 28.7 64 64v8c0 53-43 96-96 96h-8C94.6 296 48 249.4 48 192c0-79.5 64.5-144 144-144s144 64.5 144 144c0 73.2-54.6 133.6-125.2 142.8zM0 192C0 298 86 384 192 384c41.5 0 79.9-13.1 111.2-35.5L457.4 502.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L348.5 303.2C370.9 271.9 384 233.5 384 192C384 86 298 0 192 0S0 86 0 192z" /></svg>
+              </button>
+              <button data-set-theme="light">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0c-13.3 0-24 10.7-24 24V88c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24zm0 400c-13.3 0-24 10.7-24 24v64c0 13.3 10.7 24 24 24s24-10.7 24-24V424c0-13.3-10.7-24-24-24zM488 280c13.3 0 24-10.7 24-24s-10.7-24-24-24H424c-13.3 0-24 10.7-24 24s10.7 24 24 24h64zM112 256c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H88c13.3 0 24-10.7 24-24zM437 108.9c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-45.3 45.3c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0L437 108.9zM154.2 357.8c-9.4-9.4-24.6-9.4-33.9 0L75 403.1c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l45.3-45.3c9.4-9.4 9.4-24.6 0-33.9zM403.1 437c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-45.3-45.3c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L403.1 437zM154.2 154.2c9.4-9.4 9.4-24.6 0-33.9L108.9 75c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l45.3 45.3c9.4 9.4 24.6 9.4 33.9 0zM256 368a112 112 0 1 0 0-224 112 112 0 1 0 0 224z" /></svg>
+              </button>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main">
+        <section>
+          <div class="container">
+            <div id="scoreboards">
+              <article id="scoreHome">
+                <figure>
+                  <figcaption>Home <span class="readerOnly">Score</span></figcaption>
+                  <output class="currentScore" aria-live="polite">0</output>
+                </figure>
+
+                <div class="btnGroup" role="group">
+                  <button data-score-add="1" aria-label="Add 1 to Home Score">+1</button>
+                  <button data-score-add="2" aria-label="Add 2 to Home Score">+2</button>
+                  <button data-score-add="3" aria-label="Add 3 to Home Score">+3</button>
+                </div>
+              </article>
+              <article id="scoreGuest">
+                <figure>
+                  <figcaption>Guest <span class="readerOnly">Score</span></figcaption>
+                  <output class="currentScore" aria-live="polite">0</output>
+                </figure>
+
+                <div class="btnGroup" role="group">
+                  <button data-score-add="1" aria-label="Add 1 to Guest Score">+1</button>
+                  <button data-score-add="2" aria-label="Add 2 to Guest Score">+2</button>
+                  <button data-score-add="3" aria-label="Add 3 to Guest Score">+3</button>
+                </div>
+              </article>
+
+              <div id="scoreStateBtns">
+                <div class="inner">
+                  <div class="btnGroup" role="group">
+                    <button id="scoreUndo" aria-label="Undo score" disabled>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M40 224H16V200 56 32H64V56v80.1l20-23.5C125 63.4 186.9 32 256 32c123.7 0 224 100.3 224 224s-100.3 224-224 224c-50.4 0-97-16.7-134.4-44.8l28.8-38.4C179.8 418.9 216.3 432 256 432c97.2 0 176-78.8 176-176s-78.8-176-176-176c-54.3 0-102.9 24.6-135.2 63.4l-.1 .2 0 0L93.1 176H184h24v48H184 40z" /></svg> Undo
+                    </button>
+                    <button id="scoreRedo" aria-label="Redo score" disabled>
+                      Redo <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M472 224h24V200 56 32H448V56v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8l-28.8-38.4C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328 304v48h24H472z" /></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="scoreLog">
+              <h3 class="readerOnly">Score Log</h3>
+              <div id="logGrid">
+                <span>Home <span class="readerOnly">team score</span></span>
+                <span>Guest <span class="readerOnly">team score</span></span>
+                <ul id="historyList" aria-live="polite"></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer role="contentinfo">
+        <div class="container">
+          Created by Kyle Schuller
+          <span class="socials">
+            <a class="btn" target="_blank" href="https://github.com/KyleSchuller">
+              <span class="readerOnly">GitHub: Where my code lives</span>
+              <svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"></path></svg>
+            </a>
+            <a class="btn" target="_blank" href="#" disabled inert>
+              <span class="readerOnly">Website: My corner of the web</span>
+              <img src="src/media/kschuller.webp" alt="" role="presentation" aria-hidden="true" />
+            </a>
+            <a class="btn" target="_blank" href="#" disabled inert>
+              <span class="readerOnly">Twitter: 280 characters of chaos</span>
+              <svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+            </a>
+          </span>
+        </div>
+      </footer>
+    </div>
+
+    <dialog class="modal" id="modalInfo">
+      <div class="container containerSmall">
+        <div class="card">
+          <h2 id="modalInfoLabel">Track a Basketball game score!</h2>
+          <p>This app has been created as a <a href="https://scrimba.com/" target="_blank">Scrimba</a> challenge:</p>
+          <ul class="revert">
+            <li><a href="https://scrimba.com/learn/frontend/solo-project-pro-basketball-scoreboard-cz9adVfP" target="_blank">Solo Project (PRO) - Basketball Scoreboard</a></li>
+          </ul>
+          <div>
+            <button type="button" data-close>Dismiss</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="modal" id="modalResetConfirm">
+      <div class="container containerSmall">
+        <div class="alert">
+          <h2 id="modalResetConfirmLabel">Are you sure you?</h2>
+          <p>Starting a new game will reset the scores to "0"</p>
+          <div>
+            <button id="scoreResetConfirm"><strong>Yes, start new game!</strong></button>
+            <button type="button" data-close>Dismiss</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>
