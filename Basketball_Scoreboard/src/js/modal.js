@@ -7,11 +7,11 @@ export default class Modal {
     this.dialog = dialogElement;
     this.lastFocusedElement = null;
 
-    ['handleBackdropClick', 'closeModal'].forEach(fn => (this[fn] = this[fn].bind(this)));
+    ["handleBackdropClick", "closeModal"].forEach((fn) => (this[fn] = this[fn].bind(this)));
 
-    this.dialog.addEventListener('click', this.handleBackdropClick);
-    this.dialog.querySelectorAll('[data-close]').forEach(button => {
-      button.addEventListener('click', this.closeModal);
+    this.dialog.addEventListener("click", this.handleBackdropClick);
+    this.dialog.querySelectorAll("[data-close]").forEach((button) => {
+      button.addEventListener("click", this.closeModal);
     });
   }
 
@@ -23,18 +23,18 @@ export default class Modal {
     this.lastFocusedElement = document.activeElement;
     this.dialog.showModal();
     this.toggleScrollLock(true);
-    this.dispatchCustomEvent('openModal');
+    this.dispatchCustomEvent("openModal");
   }
 
   closeModal() {
     this.dialog.close();
     this.restoreFocus();
     this.toggleScrollLock(false);
-    this.dispatchCustomEvent('closeModal');
+    this.dispatchCustomEvent("closeModal");
   }
 
   toggleScrollLock(lock) {
-    document.body.classList[lock ? 'add' : 'remove']('stopScroll');
+    document.body.classList[lock ? "add" : "remove"]("stopScroll");
   }
 
   restoreFocus() {
@@ -47,9 +47,9 @@ export default class Modal {
   }
 
   destroy() {
-    this.dialog.removeEventListener('click', this.handleBackdropClick);
-    this.dialog.querySelectorAll('[data-close]').forEach(button => {
-      button.removeEventListener('click', this.closeModal);
+    this.dialog.removeEventListener("click", this.handleBackdropClick);
+    this.dialog.querySelectorAll("[data-close]").forEach((button) => {
+      button.removeEventListener("click", this.closeModal);
     });
   }
 }

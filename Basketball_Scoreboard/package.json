@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "start": "parcel src/App.html",
+    "build": "parcel build src/App.html"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.9.3",

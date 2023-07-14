@@ -1,34 +1,13 @@
-@import './root.scss';
-@import './reset.scss';
+@import "./css/root.scss";
+@import "./css/reset.scss";
+@import "./css/rebuild.scss";
 
-#appTheme > button[aria-pressed='true'] {
+// Active theme button
+#appTheme > button[aria-pressed="true"] {
   color: rgb(var(--state-rgb) / 1);
   opacity: 1;
   outline: 0.125em solid rgb(var(--state-rgb) / 1);
   outline-offset: -0.125em;
-}
-
-:where(html, body) {
-  min-height: 100%;
-}
-
-html {
-  display: grid;
-  font-size: 1rem;
-  font-family: 'Red Hat Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  color: var(--body-color);
-  display: grid;
-  text-rendering: optimizeSpeed;
-  line-height: var(--line-height);
-
-  & > * {
-    grid-area: 1/1/-1/-1;
-  }
 }
 
 :where(.stopScroll) {
@@ -45,107 +24,6 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-
-:where(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, strong, .strong) {
-  font-weight: bolder;
-}
-:where(h1, .h1) {
-  font-size: var(--type-scale-1, 1.802em);
-}
-:where(h2, .h2) {
-  font-size: var(--type-scale-2, 1.602em);
-}
-:where(h3, .h3) {
-  font-size: var(--type-scale-3, 1.424em);
-}
-:where(h4, .h4) {
-  font-size: var(--type-scale-4, 1.266em);
-}
-:where(h5, .h5) {
-  font-size: var(--type-scale-5, 1.125em);
-}
-:where(h6, .h6) {
-  font-size: var(--type-scale-6, 1em);
-}
-:where(small, .small) {
-  font-size: var(--type-scale-small, 0.889em);
-}
-
-a {
-  color: var(--link-color);
-  cursor: pointer;
-  text-decoration: underline;
-
-  &:visited {
-    color: inherit;
-  }
-}
-
-.btn,
-button,
-input[type='submit'] {
-  border: 1px solid currentColor;
-  border-radius: 0.375em;
-  color: currentColor;
-  line-height: 1;
-  padding: 0.75em 1.5em;
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  & > * {
-    line-height: 1;
-    pointer-events: none;
-  }
-  & > svg {
-    aspect-ratio: 1;
-    block-size: 1em;
-    vertical-align: -0.1625em;
-
-    & path {
-      fill: currentColor;
-    }
-  }
-
-  &:not([disabled]):not([inert]) {
-    cursor: pointer;
-  }
-  &:focus-visible:not([disabled]):not([inert]) {
-    color: var(--link-color);
-  }
-  &:hover:not([disabled]):not([inert]) {
-    box-shadow: 0 0 0 0.125em rgb(var(--state-rgb) / 0.42);
-  }
-
-  &[disabled],
-  &[inert] {
-    opacity: 0.5;
-  }
-}
-
-.btnGroup {
-  border: 1px solid currentColor;
-  border-radius: 0.75em;
-  display: grid;
-  grid-auto-flow: column;
-
-  & > * {
-    border: unset;
-    border-radius: unset;
-    box-shadow: inset 0 0 0 0.5px currentColor;
-    margin: -0.5px;
-    padding: 0.75em;
-
-    &:first-child {
-      border-radius: 0.75em 0 0 0.75em;
-    }
-    &:last-child {
-      border-radius: 0 0.75em 0.75em 0;
-    }
-  }
 }
 
 #app {
@@ -194,7 +72,7 @@ input[type='submit'] {
   }
   & > footer {
     grid-area: 3/1/4/-1;
-    font-family: 'Indie Flower', cursive;
+    font-family: "Indie Flower", cursive;
     font-size: 1.25em;
     letter-spacing: 0.25ch;
     line-height: 1;
@@ -267,7 +145,7 @@ input[type='submit'] {
         border: 1px solid var(--body-color);
         border-radius: 0.75rem 0.75rem 0 0;
         color: rgb(var(--red-600) / 1);
-        font-family: 'Press Start 2P', monospace;
+        font-family: "Press Start 2P", monospace;
         font-size: clamp(3rem, 0.903rem + 5.83vw, 6rem);
         margin-block-end: -1px;
         padding: 1.5rem;
@@ -340,7 +218,7 @@ input[type='submit'] {
 #logGrid::before {
   align-self: center;
   background-color: currentColor;
-  content: '';
+  content: "";
   grid-area: 1/1/-1/-1;
   block-size: 1px;
   z-index: 1;
